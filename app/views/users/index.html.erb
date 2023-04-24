@@ -1,0 +1,18 @@
+<div class="container">
+  <h3>ALL User</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">View Profile</th>
+      </tr>
+    </thead>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.name %></td>
+        <td><%= link_to "Profile", u, class:"btn btn-success" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <td><%= link_to "Add User", new_user_path, class:"btn btn-primary" %></td>
+</div>

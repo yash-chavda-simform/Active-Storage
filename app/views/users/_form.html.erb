@@ -1,0 +1,38 @@
+<%= form_with model: @user, html: { class: 'upload-form' } do | form | %>
+  <%= form.label :name, class: "col-sm-2 col-form-label" %>
+  <%= form.text_field :name, class: "form-control" %><br>
+  <%= form.file_field :avatar, direct_upload: true %>
+  <div class="progress-bar-container">
+    <div class="progress-bar" style="width: 0%; background-color: red"></div>
+  </div>
+  <%= form.submit class:"btn btn-primary" %>
+<% end %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  const fileInput = document.querySelector('form.upload-form input[type=file]');
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const xhr = new XMLHttpRequest();
+      const url = $('form.upload-form').attr('action');
+
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+
+      xhr.upload.onprogress = (event) => {
+        const percentage = Math.round((event.loaded / event.total) * 100);
+        $('.progress-bar').css('width', percentage + '%');
+      };
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+        // handle the server response here
+        }
+      };
+
+      const formData = new FormData();
+      formData.append('avatar', file);
+      xhr.send(formData);
+    }
+  });
+</script>
