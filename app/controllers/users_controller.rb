@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:success] = "User Is Created"
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(post_params)
+      flash[:success] = "User Is Updated"
       redirect_to root_path
     else
       render :edit, status: :unprocessable_entity
@@ -31,11 +33,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.delete
+    if @user.destroy
+      flash[:success] = "User Is Deleted"
+    else
+      flash[:danger] = "User Is Not Deleted"
+    end
     redirect_to root_path
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :avatar)
   end

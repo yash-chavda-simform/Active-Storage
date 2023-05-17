@@ -5,12 +5,19 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">View Profile</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
-    <% @users.each do |u| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= u.name %></td>
-        <td><%= link_to "Profile", u, class:"btn btn-success" %></td>
+        <td><%= user.name %></td>
+        <td><%= image_tag user.avatar.variant(:thumb) %></td>
+        <td><%= link_to "Profile", user, class:"btn btn-success" %></td>
+
+        <td><%= link_to "Delete", user_path(user), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </table>
