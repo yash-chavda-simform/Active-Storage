@@ -1,0 +1,6 @@
+<%= form_with model: @user, html: { class: 'upload-form' } do | form | %>
+  <%= form.label :name, class: "col-sm-2 col-form-label" %>
+  <%= form.text_field :name, class: "form-control" %><br>
+  <%= form.file_field :avatar, direct_upload: true %>
+  <%= form.submit class:"btn btn-primary" %>
+<% end %>

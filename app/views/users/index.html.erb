@@ -1,0 +1,25 @@
+<div class="container">
+  <h3>ALL User</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">View Profile</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= image_tag user.avatar.variant(:thumb) %></td>
+        <td><%= link_to "Profile", user, class:"btn btn-success" %></td>
+
+        <td><%= link_to "Delete", user_path(user), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      }, class:"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <td><%= link_to "Add User", new_user_path, class:"btn btn-primary" %></td>
+</div>

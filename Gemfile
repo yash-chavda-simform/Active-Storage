@@ -30,6 +30,17 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+#debugging
+gem "pry"
+
+#active storage
+gem 'activestorage', '~> 7.0'
+
+#active storage
+gem "image_processing"
+
+#bootstrap
+gem 'bootstrap'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
